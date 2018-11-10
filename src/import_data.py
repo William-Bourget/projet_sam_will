@@ -5,25 +5,16 @@ Created on Sat Nov 10 09:33:22 2018
 
 @author: Samuel_Levesque
 """
-import csv
-import os
+import numpy as np
 
 
 def import_training_data():
-    my_path = os.path.abspath(os.path.dirname(__file__))
-    path = os.path.join(my_path, "data/train-features.csv")
-    with open(path, 'rb') as csvfile:
-        spamreader = csv.reader(csvfile, delimiter=',')
-        for row in spamreader:
-            print(', '.join(row))
+    X_full_data = np.genfromtxt("../data/train-features.csv", delimiter=",", skip_header=True)
+    y_full_data = np.genfromtxt("../data/data-id-train.csv", delimiter=",", skip_header=True)
 
-    return 0
+    return X_full_data, y_full_data
 
 
 if __name__ == "__main__":
-#    test = import_training_data()
-
-    my_path = os.path.abspath(os.path.dirname(__file__))
-    path = os.path.join(my_path, "data/train_features.csv")
-    with open(path) as f:
-        test = list(csv.reader(f))
+    X, y = import_training_data()
+    print(X, y)
